@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\SiteResources\**" />
+    <Content Remove="wwwroot\SiteResources\**" />
+    <EmbeddedResource Remove="wwwroot\SiteResources\**" />
+    <None Remove="wwwroot\SiteResources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\WebAppsHelpDocs\HowTo_Edit_PATH_And_CLASSPATH.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="src\assets\PHPtest.php" />
+    <Content Include="src\assets\PHPtest.php.txt" />
+    <Content Include="Views\assets\PHPtest.php" />
+    <Content Include="Views\assets\PHPtest.php.txt" />
+    <Content Include="Views\assets\PHPtest.txt" />
+    <Content Include="wwwroot\php\htmlpage.html" />
+    <Content Include="wwwroot\php\PHPtest.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="7.0.7-m61" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

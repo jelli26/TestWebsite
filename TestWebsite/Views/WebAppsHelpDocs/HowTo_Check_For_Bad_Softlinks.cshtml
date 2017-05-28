@@ -1,0 +1,133 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How to check for bad softlinks";
+}
+Hopefully this information will get us all on about the same page.
+<br>
+First this is a screen shot of the <b>$HOME</b> directory:
+<br>
+ls -al ~
+<br>
+<img src="~/images/listing_all_long.jpg">
+<br>
+If you followed along with the directions from <a href="./HowTo_Install_Java_&_MySQLConnector.htm">here</a>, your home directory should look very much like this.
+<br>
+Note we have a line
+<br>
+<b>
+    drwxr-xr-x 11 shamblin domain users 4096 Jan 30 13:57 jdk1.6.0_23
+</b>
+<br>
+The d at the beginning indicates it is a directory.  This is the java development kit which we installed.
+<br>
+Note that we also have a line that ends with
+<br>
+<b>
+    Java -&gt; jdk1.6.0_23/
+</b>
+<br>
+That is the soft link we created to the development kit so we would have an easier name to remember.
+<br>
+Similarly we hava a line that ends with
+<br>
+<b>
+    15:53 mysql-connector-java-5.1.14
+</b>
+<br>
+which is the folder containing the mysql connector for java
+<br>
+and the line ending
+<br>
+<b>
+    MySqlConnector -&gt; mysql-connector-java-5.1.14
+</b>
+<br>
+is the soft link for an easier name.
+<br>
+The line that ends with
+<br>
+<b>
+    10:02 apache-tomcat-7.0.8
+</b>
+<br>
+is the tomcat installation and the line that ends
+<br>
+<b>
+    tomcat -&gt; apache-tomcat-7.0.8/
+</b>
+<br>
+gives us an easier name to use for the tomcat directory.
+
+<br>
+You should have those directories and those softlinks
+<br>
+IF you have something like the line that ends with red background
+<br>
+badlink -&gt; badlink
+<br>
+you made some mistake when you set up the softlinks.  You need to remove these with the command
+<br>
+rm badlink ( use the name in your listing ) if you use the tab completion it will stick a forward slash on the end indicating a directory, delete the forward slash.
+<br>
+Your .bash_profile file should look like:
+<br>
+<img src="~/images/edit_bash_profile.jpg">
+<br>
+this should put your jdk in your path and the mysql connector and the other thing in your classpath where java can access them.
+<br>
+remember we copied mysql-connector-java-5.1.14-bin.jar to connector.jar in the MySqlConnector/ directory.
+<br>
+These changes will not take affect until the next time you log on. (log off and log back on )
+<br>
+the commands
+<br>
+which java
+<br>
+javac -version
+<br>
+java -version
+<br>
+should have results similar to below.
+<br>
+<img src="~/images/java.jpg">
+<br>
+The data displayed at this (Unavailable link)
+can be copied and pasted into a file named HelloWorld.java .  Maybe you should create a directory to hold your source code.
+<br>
+In the directory containing HelloWorld.java  issue the command
+<br>
+javac HelloWorld.java
+<br>
+Nothing should appear to happen but if you do a listing ( ls ) you should see another file named HelloWorld.class
+<br>
+Now if you issue the command
+<br>
+java HelloWorld
+<br>
+You should see the output of the program on the screen:
+<br>
+Hello World
+<br>
+The data displayed <a href="./Files/MyJDBC_Driver_5.java.html">here</a> can be copied and pasted into a file named MyJDBC_Driver_5.java and then compiled
+<br>
+javac MyJDBC_Driver_5.java
+<br>
+and run
+<br>
+java MyJDBC_Driver_5
+<br>
+You can change the line containing
+<br>
+ //192.168.49.21:3306/
+<br>
+to
+<br>
+ //192.78.4.85:3306/
+<br>
+to test the program from off campus.  <h2>THOSE IP ADDRESSES MAY OR MAY NOT BE CORRECT FOR YOU.  It depends on Shamblin.</h2>
+<br>
+Please take a look at the code and see how much you can figure out for yourself
+<br>
+More later maybe

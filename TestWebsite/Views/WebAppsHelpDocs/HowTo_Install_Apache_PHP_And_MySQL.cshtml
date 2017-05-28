@@ -1,0 +1,190 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How to install Apache, PHP & MySQL";
+}
+<h3>Install</h3>
+<ul>
+    <li>
+        Apache (reinstall)
+    </li>
+    <li>PHP</li>
+    <li>MySql</li>
+</ul>
+
+<a href="http://www.eng.lsu.edu/mirrors/apache//httpd/httpd-2.4.12.tar.gz">Download httpd-2.4.12.tar.gz</a> If you still have the original tarball or folder inwhich you extracted it, you can use that
+<br>
+<a href="http://php.net/get/php-5.6.8.tar.gz/from/a/mirror">Download PHP_5.6.7.tar.gz</a>
+<br>
+<a href="http://dev.mysql.com/downloads/mysql/">download mysql-5.6.24-linux-glibc2.5-i686.tar.gz</a>
+
+<h3>Apache</h3>
+Remove the original installation
+<pre> rm -r /path-to-folder/apache</pre>
+
+go to directory in which you wish to expand the tarball
+<br>
+unpack <pre> tar xzvf path-to-tarball/httpd-2.2.17.tar.gz</pre>
+change directory to the directory just created
+<pre>    cd httpd-2.2.17</pre>
+<br>If you are using the extraction from the original installation, get rid of the old configuration files
+<pre>make clean</pre>
+configure and install
+<pre>
+<i>Possible error during ./configure:</i> If you recieve an error message about PCRE missing, download <a href="http://pcre.org/">PCRE</a>, unpack, ./configure, make, and make install it.
+		Then, add --with-pcre=Path/To/PCRE/pcre-config to the ./configure below.  You may also need to <u><i>sudo find / -name libpcre.so*</i></u> and
+<u><i>sudo cp /Source/ /Destination/</i></u> the proper .so file to the shared /lib/ folder for your system.
+   ./configure --prefix=path-to-where-you-want-to-install-apache/apache
+	       --enable-so
+   make
+   make install
+</pre>
+modify httpd.conf to listen on port 8000
+<br>
+start http server <b> and make sure it is working </b>
+<pre>   /path-to-where-you-installed-apache/bin/apachectl start
+</pre>
+Open a browser and goto http://localhost:8000 and make sure apache is running
+<br>
+stop http server
+<pre>   /path-to-where-you-installed-apache/bin/apachectl stop
+</pre>
+
+<h3>PHP: &nbsp;&nbsp;&nbsp;<u>Skip this section until MySQL is unpacked from its tarball.</u>  We'll need to configure PHP to work with MySQL, so we need it installed first.<br>  If you don't need to configure PHP to work with MySQL, continue with the following instructions, ignoring the --with-mysql options in the ./configure section.  More information on this can be found here: <a target="_blank" href="http://php.net/manual/en/mysqli.installation.php">PHP.net (MySQL installation)</a></h3>
+
+go to the directory in which you wish to expand the tarball
+<br>
+unpack
+<pre>    tar xzvf path-to-tarball/php-5.3.6.tar.gz
+</pre>
+change to the directory just created
+<pre>    cd php-5.3.6
+</pre>
+configure and install.
+<del>
+<pre>
+		./configure --with-apxs2=/path-to-where-you-installed-apache/bin/apxs \
+    --with-mysql \
+    --prefix=/path-to-where-you-want-to-install-php/php
+</pre>
+</del>
+<pre>    
+<i>For Apache version 2.4.12 and higher!</i> Newer versions of Apache now seem to require a multithreaded version of PHP.  To make PHP multithreaded,
+			a few new steps have to be done.  First, we'll need to install git, so we can install pthreads from GitHub.  We'll put that in
+			./ext/, and then rebuild the ./configure script to handle the --enable-pthreads option.    Source: <a href=http://blog.flowl.info/2015/compile-php-5-6-pthreads-mongo-ubuntu />Source 1</a>, <a href=http://php.net/manual/en/pthreads.installation.php>Source 2</a>, & <a href=http://stackoverflow.com/questions/25686800/how-to-recompile-php-with-zts-enabled-on-ubuntu>Source 3</a>
+<u><i>sudo apt-get install git</i></u>
+<u><i>cd ./ext</i></u>
+<u><i>git clone https://github.com/krakjoe/pthreads.git</i></u>
+<u><i>./buildconf --force</i></u>
+			Now <u><i>./configure --help | grep pthreads</i></u> should print the --enable-pthreads options.  If so, move on to the ./configure and
+			add <u><i>--enable-pthreads --enable-maintainer-zts</i></u>
+
+
+
+
+<i>For Ubuntu Users!</i> Open another terminal, type <u><i>sudo apt-get install libxml2-dev</i></u>.  This is a needed configuration file that may be missing.
+<i>For Ubuntu Users!</i> You may have to do a <u><i>sudo ./configure</u></i>. After trying ./configure, if it gives you Permission denied errors, use sudo.
+<i>Possibly Required!</i> If PHP fails to configure, mentioning apr-1-config not found error, open another terminal and type 
+<u><i>wget http://apache.mirror.uber.com.au//apr/apr-1.5.1.tar.gz</i></u> and also <u><i>wget http://apache.mirror.uber.com.au//apr/apr-util-1.5.4.tar.gz</i></u>.
+			Unpack the apr tarball with <u><i>tar xf apr-1.5.1.tar.gz</i></u>, cd into the unpacked folder,
+			and then proceed to <u><i>./configure</i></u> and then <u><i>make</i></u> and <u><i>make install</i></u> it.  Once it is finished, do the same with the apr-util tarball,
+			but use <u><i>./configure --with-apr=/usr/local/apr/bin/apr-1-config</i></u> .  Sudo may be required to make / make install.
+<i>Extra!</i> If you want to create thumbnails from JPG/JPEG and PNG images, use another terminal to <u><i>sudo apt-get install libmcrypt-dev libpng-dev libjpg-dev</i></u>
+			and add <u><i>--with-gd --with-jpeg-dir=/usr/lib/i386-linux-gnu --with-png-dir=/usr/lib/i386-linux-gnu</i></u> to the ./configure for PHP below.
+			*NOTE* the location for jpeg and png may be different for your system. My system is x86 (i386).  Use <u><i>sudo find / -name libjpeg*</i></u> and
+			find the folder containing libjpeg.so.
+        ./configure --with-apxs2=/path-to-where-you-installed-apache/bin/apxs
+		    --with-mysql=/path-to-where-you-installed-MySQL/
+		    --with-mysqli=mysqlnd
+		    --with-pdo-mysql=mysqlnd
+		    --prefix=/path-to-where-you-want-to-install-php/php
+		    --with-config-file-path=/path-to-where-you-want-to-install-php/lib
+	make
+	make install
+	cp php.ini-development /path-to-where-you-want-to-install-php/lib/php.ini
+</pre>
+Ensure Apache is configured for php:
+<br>
+Open http.conf (Apache/conf/) in a text editor
+<br>
+Ensure the line
+<br><b>LoadModule php5_module modules/libphp5.so</b><br>
+is there
+<br>
+Search for a section that looks like:
+<br>
+&lt;FilesMatch ....&gt;<br>
+...<br>
+&lt;/FilesMatch&gt;
+<br>
+Immediately after that, add a section:
+<br>
+<pre>&lt;FilesMatch \.php$&gt;
+	SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+</pre>
+Write a test file if you wish.  Simply opening <a target="_blank" href="./PHPtest.php">this file</a> through Apache will tell you.  Hello World should display in blue.
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My PHP Page
+&lt;title/&gt;
+&lt;head&gt;
+&lt;body&gt;
+&lt;?php echo '&lt;p&gt;Hello World&lt;/p&gt;'; ?&gt;
+&lt;body/&gt;
+&lt;html/&gt;
+</pre>
+Name it myphp.php and save at the document root of apache.
+<br>
+Start apache, open a browser and go to
+<pre>	http://localhost:8000/myphp.php
+</pre>
+try another but replace/add to  echo '&lt;Hello World&lt;/p&gt;';  with phpinfo();
+<br>
+Check the links for some php tutorials.
+
+<h3>MySQL</h3>
+The MySQL we downloaded is a binary file;i.e., we dont't have to configure, make, etc.
+<br>
+It will extract as a ready to use installation, we just have to make
+sure we extract it to where we want it and then create a soft link to
+it.
+<br>
+Go to where you want to install it
+<br>
+extract it
+<pre>	tar xzvf path-to-where-you-downloaded-it/mysql-5.5.10-linux2.6-i636.tar.gz
+</pre>
+create a soft link
+<pre>	ln -s mysql mysql-5.5.10-linux2.6-i686
+</pre>
+I am following <a href="http://dev.mysql.com/doc/refman/5.5/en/binary-installation.html"> with some slight modifications</a>.
+<br>
+<h2>
+    <b>
+        We will not create a new user or group to run mysql.  We will use your userid as the user and 'domain users' as the group
+        <br />
+        We will not change ownership of any directories or subdirectories.
+        <br />
+        This assumes you extracted the tarball as a normal user in your home directory
+    </b>
+</h2>
+Go into the mysql directory
+<pre>	cd mysql
+</pre>
+Run the scripts to set up the initial mysql database
+<pre>	Ubuntu Users:  You may need to open another terminal and <i><u>sudo apt-get install libaio1</u></i> before you can run the script below.
+	scripts/mysql_install_db --user=<i>YOUR USER ID</i>
+</pre>
+
+Now, let's move on to the next tutorial:  <a target="_top" href="./HowTo_SetUp_MySQL_Password_&_Databases.html"> Setting up MySQL root accounts and installing Sakila Database</a>
+<br>
+<br>
+Additional links:
+<br>
+<a href="http://dev.mysql.com/doc/refman/5.5/en/account-management-sql.html">users and permissions</a>
+<br>
+<a href="http://dev.mysql.com/doc/index-other.html">sakila database</a>
+<br>
+<a href="http://dev.mysql.com/doc/sakila/en/sakila.html#sakila-installation">installation</a>

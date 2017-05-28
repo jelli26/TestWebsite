@@ -1,0 +1,87 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How To Install Wolfenstein: Enemy Territory";
+}
+<style>
+    h1 {
+        color: #aa0000;
+    }
+</style>
+
+<section>
+    <h1>Windows - New Installation</h1>
+    <ol>
+        <li><h3>Download and install <a href="http://download.cnet.com/Return-to-Castle-Wolfenstein-Enemy-Territory-full-install/3000-7441_4-10243510.html" target="_blank"> WolfET V2.60.</a></h3></li>
+        <li><h3>While it's installing, download<a href="http://www.gamershell.com/download_13637.shtml" target="_blank"> the V2.60b patch .</a></h3></li>
+        <li><h3>Once V2.60 is finished installing, unzip the V2.60b patch and copy/paste the ET.exe and ETDED.exe files inside over the ones that were just installed.  Now you're finished!</h3></li>
+        <li><h3>With your game set up, write down this servers IP address and try connecting with port 27960</h3></li>
+    </ol>
+</section>
+<br>
+<br>
+<section>
+    <h1>Windows - Upgrading from V2.55</h1>
+    <ol>
+        <li><h3>Assuming you have an old WolfET V2.55 installation, download and install <a href="" target="_blank">the V2.60 update .</a></h3></li>
+        <li><h3>Once V2.60 is finished installing, unzip the V2.60b patch and copy/paste the ET.exe and ETDED.exe files inside over the ones that were just installed.  Now you're finished!</h3></li>
+        <li><h3>With your game set up, write down this servers IP address and try connecting with port 27960</h3></li>
+    </ol>
+</section>
+<br>
+<br>
+<section>
+    <h1>Linux - New Installation</h1>
+    <ol>
+        <li><h3>First, open a Terminal and download the dependencies with <b><i><font color="green">sudo apt-get install libgtk1.2</font></i></b></h3></li>
+        <li><h3>If your system is x64, also download the x86 libs with <b><i><font color="green">sudo apt-get install ia32-libs</font></i></b></h3></li>
+        <li><h3>Next, download ET to your HOME directory with <b><i><font color="green">wget -c http://ftp.games.skynet.be/pub/wolfenstein/et-linux-2.60.x86.run</font></i></b></h3></li>
+        <li><h3>While it's downloading, download the <a href="http://www.gamershell.com/download_13637.shtml" target="_blank"> the V2.60b patch</a></h3></li>
+        <li><h3>Avoid permission errors by making sure what you downloaded is executable with <b><i><font color="green">sudo chmod +x et-linux-2.60.x86.run</font></i></b></h3></li>
+        <li><h3>Install ET with <b><i><font color="green">sudo sh ./et-linux-2.60.x86.run</font></i></b></h3></li>
+        <li><h3>Once ET is finished installing, unzip the V2.60b patch and copy/paste the ET.x86 and ETDED.x86 files inside over the existing ones (possibly in /usr/local/games/enemy-territory).</h3></li>
+        <li>
+            <h3>
+                Run ET through the Terminal with <b><i><font color="green">et</font></i></b>, and see if you have sound.  You probably won't, because the game uses the deprecated ALSA sound system.  If you somehow have sound, great!  If you don't, try this ET-SDL-Sound workaround:<br>
+                <ol>
+                    <li><h5>First, you'll need libSDL.so.  Check /usr/lib/i386-linux-gnu to see if you have it.  If not, get it through the Terminal with <b><i><font color="green">sudo apt-get install libsdl1.2debian</font></i></b></h5></li>
+                    <li><h5>Now that you have it, get et-sdl-sound through the Terminal with <b><i><font color="green">wget -q -O - http://nullkey.kapsi.fi/et-sdl-sound/et-sdl-sound.gz | gzip -d &gt; et-sdl-sound &amp;&amp; chmod a+x et-sdl-sound</font></i></b> </h5></li>
+                    <li><h5>Open the script with a text editor (mine is leafpad. Yours may be gedit) <b><i><font color="green">sudo leafpad /home/path_to_script/et-sdl-sound</font></i></b></h5></li>
+                    <li><h5>Change SDL_AUDIODRIVER from "alsa" to "pulse"</h5></li>
+                    <li><h5>Set both LIBSDL and ETSDL_SDL_LIB="/usr/lib/i386-linux-gnu/libSDL.so", save and exit.</h5></li>
+                    <li><h5>Now create a link on your desktop to the script with <b><i><font color="green">ln -s $HOME/et-sdl-sound $HOME/Desktop/Play_Wolfenstein_With_Sound</font></i></b></h5></li>
+                    <li><h5>Now try running ET with the link to the script.  This method worked for me, so I hope it works for you as well!  <a href="http://nullkey.kapsi.fi/et-sdl-sound/" target="_top">Source</a> <a href="https://help.ubuntu.com/community/EnemyTerritory" target="_top">Other Solutions</a></h5></li>
+                </ol>
+            </h3>
+        </li>
+        <li><h3>With your game set up, write down this servers IP address and try connecting with port 27960</h3></li>
+    </ol>
+</section>
+<br>
+<br>
+<section>
+    <h1>Linux - Upgrading from V2.55</h1>
+    <ol>
+        <li><h3>Open a Terminal and download the V2.60 update with <b><i><font color="green">wget -c http://ftp.games.skynet.be/pub/wolfenstein/et-linux-2.60-update.x86.run</font></i></b></h3></li>
+        <li><h3>Avoid permission errors by making sure what you downloaded is executable with <b><i><font color="green">sudo chmod +x et-linux-2.60-update.x86.run</font></i></b></h3></li>
+        <li><h3>Install the update with <b><i><font color="green">sudo sh ./et-linux-2.60-update.x86.run</font></i></b></h3></li>
+        <li><h3>While it's installing, download the <a href="http://www.gamershell.com/download_13637.shtml" target="_blank"> the V2.60b patch</a></h3></li>
+        <li><h3>Once V2.60 is finished installing, unzip the V2.60b patch and copy/paste the ET.x86 and ETDED.x86 files inside over the existing ones (possibly in /usr/local/games/enemy-territory).</h3></li>
+        <li><h3>When you're finished updating, make sure that you still have sound.  If not, try the solution near the end of Linux - New Installation.</h3></li>
+        <li><h3>With your game set up, write down this servers IP address and try connecting with port 27960</h3></li>
+    </ol>
+</section>
+<br>
+<br>
+<section>
+    <h1>Linux - Uninstallation</h1>
+    <ol>
+        <li><h3>WolfET can only be uninstalled through the terminal.  Do so with <b><i><font color="green">sudo rm -rf /usr/local/games/enemy-territory/ &amp;&amp; sudo rm -f /usr/local/bin/et &amp;&amp; rm -rf $HOME/.etwolf</font></i></b></h3></li>
+    </ol>
+</section>
+<footer>
+    Apache webserver V2.4.10. <a href="http://httpd.apache.org/" target="_blank" hreflang="en">Visit Apache HTTP Server Project</a>
+    <p>Wii U tested. Wii U <b>APPROVED</b>! WolfETInstallHelp.html last updated <time datetime="2014-09-10T13:00:00">9-10-2014</time>.</p>
+</footer><br>
+<br>

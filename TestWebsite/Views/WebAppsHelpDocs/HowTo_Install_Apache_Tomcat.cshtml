@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How to install Apache Tomcat";
+}
+<p>
+<pre>
+We can download a binary version of Tomcat from <a target="_blank" href="http://tomcat.apache.org/">here</a>.  We want to download the tar.gz.
+Assuming we downloaded it to $HOME/Downloads/ in a terminal we can
+
+<b>cd ~
+tar xzvf Downloads/apache-tomcat-7.0.6.tar.gz</b>
+
+This should create a folder $HOME/apache-tomcat-7.0.6/
+
+We can create a softlink named Tomcat to that folder:
+
+<b>cd ~
+ln -s apache-tomcat-7.0.6  Tomcat</b>
+
+I suggest using tab completion as much as possible to minimize typing errors.
+
+That is all there is to the Tomcat installation.  Tomcat listens on port 8080 by default so we want to ensure that apache has shut down before we start Tomcat.
+
+<b>$HOME/Tomcat/bin/startup.sh
+$HOME/Tomcat/bin/shutdown.sh</b>
+
+A browser pointing to <b><u>http://localhost:8080</u></b> should now show the Tomcat start page ( you may have to reload ).
+</pre>
+</p>

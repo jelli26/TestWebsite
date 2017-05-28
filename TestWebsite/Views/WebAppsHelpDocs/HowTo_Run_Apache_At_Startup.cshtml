@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How To Run Apache & MySQL At Startup & Set Up No-IP";
+}
+<h2>First, we need to write a small script in our HOME folder that will start Apache, MySQL, and eventually the No-IP Dynamic Update Client.  Then, we'll make the script run at startup.</h2>
+    <ol>
+        <li><h3>Open a Terminal, and create a new file called StartWebServer.sh with your default text editor with the command <b><i><font color="green">leafpad $HOME/StartWebServer.sh</font></i></b></h3></li>
+        <li>
+            <h3>
+                Paste this into the file, replacing the details specific to your setup:<br><font color="green">
+                    #Simple sh file for starting the Apache Webserver and MySQL at startup</br>
+                    #See /usr/share/applications/StartWebServer.desktop<br></br>
+                    #Line 1: Start Apache</br>
+                    #Line 2: CD to the mysql folder and then start mysqld_safe</br>
+                    #Line 3: Start No-IP to update the IP Address for yoursite.ddns.net</br>
+                    #Line 4: exit<br></br>
+                    /home/YourUserFolder/apache/bin/apachectl start</br>
+                    cd /home/YourUserFolder/mysql && ./bin/mysqld_safe -user=YourUserName &</br>
+                    /usr/local/bin/noip2</br>
+                    exit 0
+                </font>
+            </h3>
+        </li>
+        <li><h3>Save the file and exit the text editor to return to your Terminal.  Now create a new document with this command: <b><i><font color="green">sudo leafpad /etc/xdg/autostart/StartWebServer.desktop</font></i></b></h3></li>
+        <li>
+            <h3>
+                Paste this into the file, and save it.<br><font color="green">
+                    [Desktop Entry]</br>
+                    Name=Start WebServer</br>
+                    Exec=/home/YourUserFolder/StartWebServer.sh</br>
+                    Type=Application</br>
+                    Terminal=false
+                </font>
+            </h3>
+        </li>
+    </ol>
+
+    <h2>Next, we'll set up No-IP so you (and others) can access your server from anywhere, regardless of your servers dynamic IP Address.</h2>
+    <ol>
+        <li><h3>Visit <a target="_blank" href="http://www.noip.com">No-IP.com</a> and sign up for a free account.</h3></li>
+        <li><h3>When setting up the host, select the Port 80 Redirect option, and set the port to 8000, since your Apache Webserver is listening on port 8000.</h3></li>
+        <li><h3>Once your account and host is set up, open a Terminal and download the DUC to your HOME folder with <b><i><font color="green">wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz</font></i></b></h3></li>
+        <li><h3>When it's finished downloading, extract the folder from the tarball with <b><i><font color="green">tar xzf noip-duc-linux.tar.gz</font></i></b></h3></li>
+        <li><h3>Next, <b><i><font color="green">cd no-ip-2.1.9</font></i></b> into the extracted folder, and install it with <b><i><font color="green">sudo make</font></i></b> and <b><i><font color="green">sudo make install</font></i></b></h3></li>
+        <li><h3>Now configure DUC with <b><i><font color="green">/usr/local/bin/noip2 -C</font></i></b> .  You'll be asked to log in, and you will also be asked to set an update interval.  I went with 5, which I assume is 5 minutes.</h3></li>
+        <li><h3>Reboot your machine.  Try visiting localhost:8000 to make sure Apache started automatically like it was supposed to.</h3></li>
+        <li><h3>Now try visiting the URL you specified when setting up No-IP.  If it works, congrats, you're done!</h3></li>
+    </ol>
+
+    <br />
+    <br />
+
+    <footer>
+        Apache webserver V2.4.10. <a href="http://httpd.apache.org/" target="_blank" hreflang="en">Visit Apache HTTP Server Project</a>
+        <p>Wii U tested. Wii U <b>APPROVED</b>! WolfETInstallHelp.html last updated <time datetime="2014-09-10T13:00:00">9-10-2014</time>.</p>
+    </footer>

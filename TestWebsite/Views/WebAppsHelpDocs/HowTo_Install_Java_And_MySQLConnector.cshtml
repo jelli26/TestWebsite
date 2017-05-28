@@ -1,0 +1,167 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "HowTo Install Java & the MySQLConnector";
+}
+<ul>
+    <li>
+        Create a folder for downloaded items
+        <ul>
+            <li>
+                Open terminal
+            </li>
+            <li>
+                Ensure you are in your home directory
+                <br>
+                cd ~
+            </li>
+            <li>
+                mkdir Downloads
+            </li>
+        </ul>
+    </li>
+    <li>
+        Adjust browser to ask where to download
+        <ul>
+            <li>
+                Open a browser window
+            </li>
+            <li>
+                Edit
+            </li>
+            <li>
+                Preferences
+            </li>
+            <li>
+                Check "Show the Downloads ..."
+                <br>
+                Select "Always ask me ..."
+            </li>
+        </ul>
+
+
+
+    </li>
+    <li>
+        Download the java development kit
+        <ul>
+            <li>
+                <a href="https://cds.sun.com/is-bin/INTERSHOP.enfinity/WFS/CDS-CDS_Developer-Site/en_US/-/USD/ViewProductDetail-Start?ProductRef=jdk-6u23-oth-JPR@CDS-CDS_Developer"> Linux<br>Agree<br>Continue</a>
+            </li>
+            <li>
+                choose <b>jdk-6u23-linux-i586.bin</b>
+            </li>
+            <li>
+                Save to the Downloads folder
+            </li>
+        </ul>
+    </li>
+    <li>
+        Prepare the jdk for use
+        <ul>
+            <li>
+                From terminal
+            </li>
+            <li>
+                Ensure you are in your home directory<br>cd ~
+            </li>
+            <li>
+                Run the script you just downloaded<br>
+                sh Downloads/jdk-6u23-linux-i586.bin
+            </li>
+            <li>
+                Agree to the terms  ( Unless you really want your first born. )
+            </li>
+            <li>
+                Give it an easier name to remember<br>
+                ln -s jdk1.6.0_23/ &nbsp;&nbsp;&nbsp;Java
+            </li>
+            <li>
+                Download the Java API
+                <ul>
+                    <li>
+                        <a href="https://cds.sun.com/is-bin/INTERSHOP.enfinity/WFS/CDS-CDS_Developer-Site/en_US/-/USD/ViewProductDetail-Start?ProductRef=jdk-6u23-docs-oth-JPR@CDS-CDS_Developer">English(?)<br>Agree<br>Continue</a>
+                    </li>
+                    <li>
+                        Select jdk-6u23-docs.zip
+                    </li>
+                    <li>
+                        Save to the Java folder
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Extract the documentation
+                <ul>
+                    <li>From Terminal</li>
+                    <li>Ensure you are in the Java directory<br>cd ~/Java</li>
+                    <li>Give the command to extract<br>unzip jdk-6u23-docs.zip</li>
+                </ul>
+            </li>
+            <li>
+                Bookmark the documentation
+                <ul>
+                    <li>Open a browser window</li>
+                    <li>File<br>Open File</li>
+                    <li>Select your homedirectory/Java/docs/api/index.html<br>Open</li>
+                    <li>Bookmarks</li>
+                    <li>Bookmark this Page</li>
+                    <li>Done</li>
+                </ul>
+            </li>
+
+        </ul>
+    </li>
+    <li>
+        Download the MySql Connector
+        <ul>
+            <li>
+                <a href="http://www.mysql.com/downloads/connector/j/">select the mysql-connector-java-5.1.14.tar.gz DOWNLOAD<br></a>
+            </li>
+            <li>
+                Save to the Downloads folder
+            </li>
+        </ul>
+    </li>
+    <li>
+        Extract the connector
+        <ul>
+            <li> From terminal</li>
+            <li> Ensure you are in your home directory<br>cd ~</li>
+            <li> Extract the file<br>tar xzvf Downloads/mysql-connector-java-5.1.14.tar.gz </li>
+            <li> Give it an easier name to remember<br>ln -s mysql-connector-java-5.1.14  &nbsp;&nbsp;&nbsp;mySqlCon</li>
+            <li> Give the connector itself an easier name to manipulate<br>cp mySqlCon/mysql-connector-java-5.1.14-bin.jar  &nbsp;&nbsp;&nbsp;mySqlCon/connector.jar</li>
+        </ul>
+    </li>
+    <li>
+        Adjust PATH and CLASSPATH
+        <ul>
+            <li>From terminal</li>
+            <li> Ensure that you are in your home directory<br>cd ~</li>
+            <li>
+                Edit .bash_profile
+                <ul>
+                    <li>gedit .bash_profile</li>
+                    <li>
+                        <b>AFTER</b> the line: PATH=$PATH:$HOME/bin<br>
+                        add
+                        <br>
+                        PATH=$HOME/Java/bin:$PATH<br>CLASSPATH=.:$HOME/mySqlCon/connector.jar
+                    </li>
+                    <li>
+                        <b>AFTER</b> the line: export PATH<br>
+                        add
+                        <br>
+                        export CLASSPATH
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+Time to write a java program and a java program to connect to a database.
+<br>
+<a href="http://192.78.4.85/CS_4143/Source/java/HelloWorld.java.html">Hello World</a>
+<br>
+<a href="http://192.78.4.85/CS_4143/Source/java/MyJDBC_Driver.java.html">JDBC</a>

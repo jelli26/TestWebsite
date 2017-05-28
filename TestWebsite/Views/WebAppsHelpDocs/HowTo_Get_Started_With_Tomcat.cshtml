@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How to get started with Tomcat Servlets";
+}
+If you have been following along, you should have a softlink in your home directory named tomcat ( maybe Tomcat ) which points to apache-tomcat-7.0.8/, the installation directory for tomcat.  The tomcat documentation refers to apache-tomcat-7.0.8/ as CATALINA_HOME so I will also.
+<br>
+Tomcat can serve as a stand alone http server much like Apache.  By default  , tomcat listens on port 8080.<br>
+Under CATALINA_HOME there are eight subdirectories:
+<ul>
+    <li>bin</li>
+    <li>conf</li>
+    <li>docs</li>
+    <li>lib</li>
+    <li>logs</li>
+    <li>temp</li>
+    <li>webapps</li>
+    <li>work</li>
+</ul>
+
+The directory <b>bin</b> contains the commands to start ( startup.sh ) and stop ( shutdown.sh ) tomcat.
+<br>
+The directory <b>conf</b> contains the primary file for configuring tomcat ( server.xml ).
+<br>
+The directory <b>webapps</b> is basically the DocumentRoot from which documents are served.
+<br>
+<ol>
+    <li>Create a subdirectory '<b>CS_4143</b>' under the <b>webapps</b> directory </li>
+    <li>Create an html file, <b>index.html</b>, in the <b>CS_4143</b> directory which displays '<b> Hello World </b>'. </li>
+    <li>Start tomcat:  <br>~/tomcat/bin/startup.sh<br></li>
+    <li>
+        Start a browser and go to the url:<br>
+        <b>localhost:8080</b>
+        <br> You should see the default Tomcat start page
+    </li>
+    <li>
+        Change the url to:
+        <br> 127.0.0.1:8080/CS_4143/index.html
+        <br>
+        You should see your 'Hello World'
+    </li>
+</ol>
+<br>
+<br>
+<h2>You can get the full documentation <a target="_blank" href="http://tomcat.apache.org/">here</a> at the Tomcat website.</h2>

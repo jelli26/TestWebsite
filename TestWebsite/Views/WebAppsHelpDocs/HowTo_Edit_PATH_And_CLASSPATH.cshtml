@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How To Edit the PATH and CLASSPATH";
+}
+<p>
+    <pre>
+        Linux looks for commands in its PATH.  You can see the value of your PATH with this in a terminal:
+
+        <b>echo $PATH</b>
+
+        You can change PATH with
+
+        <b>PATH=/whatever/Your/New/Path:/or/:PathsAre</b>
+
+        You can add to your current PATH with
+
+        <b>PATH=$PATH:/your/additions</b>
+
+        or
+
+        <b>PATH=/your/additions/:$PATH</b>
+
+        and then
+
+        <b>EXPORT PATH</b>
+
+        The first adds to the end of the current path and the latter puts before the current path.
+        Linux searches the path from the beginning til it finds the command or exhausts the path.
+
+        If we already have a java, javac or other command in our PATH and we want to replace with a different, then we want to put our additions at the beginning of the PATH.
+
+        We can also personalize our PATH in <u>$HOME/.bash_profile</u>
+
+        If we use a command like
+
+        <b>which java</b>
+
+        Linux will search our PATH until it finds it and will return the path to the command or it will tell us the command is not in our PATH
+    </pre>
+    </p>
+    <br>
+    <br>
+    <p>
+        <pre>
+        <h2>UBUNTU USERS!</h2><br>
+
+        As of Ubuntu 10.04, the .bash_profile is <b><u>NOT</u></b> being used.  It doesn't run at startup, so the PATH and CLASSPATH aren't being changed.  You will need to:
+
+        <b>sudo gedit .xprofile</b>
+
+        and add this into the file:
+
+        <b>. ~/.bash_profile</b>
+
+        Now edit the .bash_profile:
+
+        <b>sudo gedit .bash_profile</b>
+
+        The end result of the .bash_profile should look something like this:
+
+        PATH=$HOME/Java/bin:$HOME/bin:$HOME/Java/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+        CLASSPATH=.:$HOME/MySQLConJava/connector.jar:/home/jacob/Tomcat/lib/servlet-api.jar:/home/jacob/Tomcat/lib/mysql-connector-java-5.1.14-bin.jar
+        export PATH
+        export CLASSPATH
+
+        Now you will need to log off, and log back on.  The new PATH and CLASSPATH will now be used.
+    </pre>
+</p>

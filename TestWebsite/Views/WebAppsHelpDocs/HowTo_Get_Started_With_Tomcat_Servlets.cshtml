@@ -1,0 +1,187 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "How to get started with Tomcat Servlets";
+}
+Java servlets is a technology which handles some of the more mundane aspects of developing web applications.  As you recall, with a basic cgi script it was necessary to parse the input stream and extract the name/value pairs ( if you did that ).  Java servlets will handle that for us ( much like the cgi.h from the C++ cgi script link, if you looked at that. )
+<br>
+<br>
+To create a servlet we need
+<ul>
+    <li>
+        a servlet container ( we have Tomcat ) with <ul>
+            <li>the appropriate file structure </li>
+            <li>deployment descriptor</li>
+        </ul>
+        to handle the servlet
+    </li>
+    <li>the servlet itself.</li>
+</ul>
+<br><br>
+
+Let's look at configuring Tomcat first.
+<br>
+<br>
+<ul>
+    <li>
+        <b>$CATALINA_HOME</b>
+        <ul>
+            <li>
+                <b>webapps</b>
+                <ul>
+                    <li>
+                        <b>CS_4143</b>
+                        <ul>
+                            <li>index.html</li>
+                            <li>OurFirstServletForm.html</li>
+                            <li>Other static files</li>
+                            <li>
+                                <b>WEB-INF</b>
+                                <ul>
+                                    <li>web.xml</li>
+                                    <li>
+                                        <b>classes</b>
+                                        <ul>
+                                            <li>OurFirstServlet.class</li>
+                                            <li>Other servlet classes</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <b>source</b>
+                                        <ul>
+                                            <li>OurFirstServlet.java</li>
+                                            <li>Other servlet source code</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <b>
+                        <li>Other web applications</li>
+                        <li>.....</li>
+                    </b>
+                </ul>
+            </li>
+            <b>
+                <li>bin</li>
+                <li>conf</li>
+                <li>....</li>
+            </b>
+        </ul>
+    </li>
+</ul>
+The directory directly off of <b>webapps</b> is the base for our application.  We have <b>CS_4143</b>  It will normally contain most of our static files.
+<br>
+<br>
+Within <b>CS_4143</b> we need to create a directory <b>WEB-INF</b>.
+<br>
+<br>
+This directory <b>WEB-INF</b> will contain our deployment descriptor which is a file named <i>web.xml</i> and another directory <b>classes</b> which will contain the byte code for our servlet.
+<br>
+<br>
+Go ahead and make the directory.
+<br>
+<br>Here is a sample <a href="http://192.78.4.85/CS_4143/web.xml.txt">web.xml</a> file.  You can copy it and paste into an editor and save as web.xml in the <b>WEB-INF</b> directory.
+<br>
+or there is a copy under 'Course Materials'
+<br>
+<br>
+DON'T MESS WITH THE FIRST FIVE LINES!!!!!!!!!!!!!!
+<br>
+<br>
+<b>
+    <ol>
+<pre><li> &lt;?xml version="1.0" encoding="ISO-8859-1"?&gt; </li>
+<li>&lt;web-app xmlns="http://java.sun.com/xml/ns/j2ee"</li>
+<li>    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</li>
+<li>    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</li>
+<li>    version="2.4"&gt;</li>
+<li></li>
+<li>&lt;!--  DON'T MESS WITH THE INFO ABOVE!!!!!!!!!!!!!!!!  --&gt;</li>
+<li>&lt;!-- THIS IS THE PART YOU CAN ADJUST --&gt;</li>
+<li>&lt;display-name&gt;</li>
+<li>	CS_4143 Sample Servlet</li>
+<li>&lt;/display-name&gt;</li>
+<li>&lt;description&gt;</li>
+<li>	This is a simple web application to get us started writing servlets</li>
+<li>&lt;/description&gt;</li>
+<li></li>
+<li>&lt;!-- DESCRIBE THE SERVLET --&gt;</li>
+<li>&lt;servlet&gt;</li>
+<li>	&lt;!-- PICK A NAME FOR YOUR SERVLET --&gt;</li>
+<li>	&lt;servlet-name&gt;</li>
+<li>		Bubbas_First_Servlet</li>
+<li>	&lt;/servlet-name&gt;</li>
+<li>	&lt;!-- THE ACTUAL NAME OF THE BYTE CODE THAT WILL BE IN THE class DIRECTORY--&gt;</li>
+<li>	&lt;servlet-class&gt;</li>
+<li>		OurFirstServlet</li>
+<li>	&lt;/servlet-class&gt;</li>
+<li>&lt;/servlet&gt;</li>
+<li></li>
+<li>&lt;&lt;!-- DESCRIBE HOW THE SERVLET WILL BE ACCESSED --&gt;</li>
+<li>&lt;servlet-mapping&gt;</li>
+<li>	&lt;!-- IDENTIFY WHICH SERVLET WE ARE DEALING WITH --&gt;</li>
+<li>	&lt;servlet-name&gt;</li>
+<li>		Bubbas_First_Servlet</li>
+<li>	&lt;/servlet-name&gt;</li>
+<li>	&lt;!-- HOW DO WE WANT IT TO BE ACCESSED --&gt;</li>
+<li>	&lt;url-pattern&gt;</li>
+<li>		/Bunny_Foo_Foo</li>
+<li>	&lt;/url-pattern&gt;</li>
+<li>&lt;/servlet-mapping&gt;</li>
+<li></li>
+<li>&lt;/web-app&gt;</li>
+</pre>
+    </ol>
+</b>
+
+<br>
+<br>
+Note that this is an xml file and be aware that it is very sensitive.  Errors in this file will cause the application to not be loaded.
+<br>
+<br>
+The display-name and description portion will not affect the servlet and (I think) can be ommitted.
+<br>
+<br>
+Lines 16 through 21 associate an identifier ( servlet-name ) with a file of byte code ( servlet-class )
+<br>
+In this descriptor I have given the servlet the name 'Bubbas_First_Servlet'.  The java source file for the servlet will be named 'OurFirstServlet.java'.  After it is compiled the source code 'OurFirstServlet.class' will be placed in the <b>classes</b> directory.
+<br>
+<br>
+Lines 24 through 29 associate our servlet with a url with the '/' meaning in relation to ../class.  Maybe that will get clearer soon.  In this case our servlet 'Bubbas_First_Servlet' is associated with a url of '/Bunny_Foo_Foo'.  It might get clearer when we look at the form that will cause this servlet to execute.
+
+<br>
+<br>
+Here is a link to a sample <a href="http://192.78.4.85/CS_4143/OurFirstServletForm.html">form</a> to call our servlet.  When I tried to just "Save page as" it messed up and I needed to do a little text editing.  You can look at the source on the server and see what it <u>should</u> look like.
+
+<br>
+<br>
+Before we get the servlet itself, we need to decide where to put it.  For ease I'm going to create another folder under <b>WEB-INF</b> named <b>source</b> and save it there.  In <i>real?</i> production you would not put your source code here.
+<br>
+Now for the servlet <a href="http://192.78.4.85/CS_4143/OurFirstServlet.java">itself.</a>
+<br>
+Compile the source with <b>javac &nbsp; &nbsp; OurFirstServlet.java</b>
+<br>
+Move the OurFirstServlet.class file to the classes directory
+<br>
+<b>mv &nbsp; *.class &nbsp;&nbsp; ../classes/ </b>
+<br>
+<br>
+To make subsequent work a little easier, we will configure Tomcat to automatically reload whenever we modify a servlet
+<br>
+<br>
+Open $HOME/tomcat/conf/context.xml for editing
+<br>
+<b>gedit &nbsp; $HOME/tomcat/conf/context.xml </b>
+<br>
+Change the line <b>&lt;Context&gt;</b> to <b>&lt;Context reloadable="true"&gt;</b>
+<br>
+<br>
+Start ( or stop and then restart  $HOME/tomcat/bin/shutdown.sh) Tomcat
+<br> $HOME/tomcat/bin/startup.sh
+<br>
+Open a browser to <b>http://localhost:8080/CS_4143/OurFirstServletForm.html</b>
+<br>
+put in some data, click submit, and see what happens.
