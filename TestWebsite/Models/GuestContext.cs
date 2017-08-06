@@ -1,50 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace TestWebsite.Models
 {
-    public class GuestContext
+    public class GuestContext : System.IDisposable
     {
-    public string ConnectionString { get; set; }
+    #region Constants And Variables
+    public string ConnectionString { get; }
+    public MySqlConnection mySQLConnection { get; private set; }
+    private bool isDisposed = false;
+    #endregion
 
+    #region Constructor
     public GuestContext(string connectionString)
     {
       this.ConnectionString = connectionString;
     }
+    #endregion
 
+    #region Methods
     private MySqlConnection GetConnection()
     {
-      return new MySqlConnection(ConnectionString);
+        if(mySQLConnection == null)
+        {
+          mySQLConnection = new MySqlConnection(ConnectionString);
+        }
+        else if (mySQLConnection?.State == System.Data.ConnectionState.Broken)
+        {
+          mySQLConnection.Close();
+        }
+
+      return mySQLConnection;
     }
 
-    public List<Guest> GetAllGuests()
+    public List<Guest> GetAllGuestsCommentsAndDates()
     {
       List<Guest> guestList = new List<Guest>();
 
-      using (MySqlConnection conn = GetConnection())
+      try
       {
-        conn.Open();
-        MySqlCommand cmd = new MySqlCommand("select * from Guests order by TimeDate desc", conn);
-
-        using (MySqlDataReader reader = cmd.ExecuteReader())
+        using (MySqlConnection conn = GetConnection())
         {
-          while(reader.Read())
+          conn.Open();
+          MySqlCommand cmd = new MySqlCommand("SELECT Name, Comment, TimeDate " +
+                                              "FROM Guests " +
+                                              "ORDER BY TimeDate DESC", conn);
+
+          using (MySqlDataReader reader = cmd.ExecuteReader())
           {
-            guestList.Add(new Guest()
+            while (reader.Read())
             {
-              Name = reader.GetString("Name"),
-              Comment = reader.GetString("Comment"),
-              TimeDate = reader.GetDateTime("TimeDate")
-            });
+              guestList.Add(new Guest()
+              {
+                Name = reader.GetString("Name"),
+                Comment = reader.GetString("Comment"),
+                TimeDate = reader.GetDateTime("TimeDate")
+              });
+            }
           }
         }
+      }
+      catch(System.Exception)
+      {
+        System.Console.Out.WriteLine("Could not retrieve the GuestList: Cannot connect to MySQL Database!");
       }
 
         return guestList;
     }
+    #endregion
+
+    #region Dispose And Destructor
+    public void Dispose()
+    {
+      if (isDisposed)
+      {
+        if (mySQLConnection?.State != System.Data.ConnectionState.Closed)
+        {
+          mySQLConnection.Close();
+        }
+        mySQLConnection?.Dispose();
+        mySQLConnection = null;
+
+        isDisposed = true;
+      }
+    }
+
+    ~GuestContext()
+    {
+      Dispose();
+    }
+    #endregion
   }
 }

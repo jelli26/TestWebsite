@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,11 +27,11 @@ namespace TestWebsite
             // Add framework services.
             services.AddMvc();
 
-            //Add services for connecting to MySQL database tables
-            services.Add(new ServiceDescriptor(typeof(Models.VideoGameListContext), new Models.VideoGameListContext(Configuration.GetConnectionString("GameConnection"))));
-            services.Add(new ServiceDescriptor(typeof(Models.AmiiboListContext), new Models.AmiiboListContext(Configuration.GetConnectionString("AmiiboConnection"))));
-            services.Add(new ServiceDescriptor(typeof(Models.GuestContext), new Models.GuestContext(Configuration.GetConnectionString("GuestbookConnection"))));
-    }
+          //Add services for connecting to MySQL database tables
+          services.Add(new ServiceDescriptor(typeof(Models.VideoGameListContext), new Models.VideoGameListContext(Configuration.GetConnectionString("GameConnection"))));
+          services.Add(new ServiceDescriptor(typeof(Models.AmiiboListContext), new Models.AmiiboListContext(Configuration.GetConnectionString("AmiiboConnection"))));
+          services.Add(new ServiceDescriptor(typeof(Models.GuestContext), new Models.GuestContext(Configuration.GetConnectionString("GuestbookConnection"))));
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

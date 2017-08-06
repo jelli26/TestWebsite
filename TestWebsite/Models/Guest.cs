@@ -6,7 +6,7 @@ namespace TestWebsite.Models
   {
     private GuestContext context;
     public string Name { get; set; }
-    public DateTime TimeDate { get; set; }
     public string Comment { get; set; }
+    public DateTime TimeDate { get; set; }
   }
 }
