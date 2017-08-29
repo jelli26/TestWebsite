@@ -1,0 +1,30 @@
+@model IEnumerable<TestWebsite.Models.VideoGame>
+@{
+    ViewBag.Title = "Video Games - Nintendo";
+}
+<h2>Video Games - Nintendo</h2>
+<table class="table">
+  <tr>
+    <th>Game Name</th>
+    <th>Game Platform</th>
+    <th>Completion Status</th>
+    <th>Date Added To DB</th>
+  </tr>
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.GameName)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.GamePlatform)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.CompletionStatus)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.DateAddedToDB)
+      </td>
+    </tr>
+  }
+</table>

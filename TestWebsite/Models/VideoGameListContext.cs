@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace TestWebsite.Models
@@ -29,8 +29,7 @@ namespace TestWebsite.Models
       {
         mySQLConnection.Close();
       }
-
-
+      
       return mySQLConnection;
     }
 
