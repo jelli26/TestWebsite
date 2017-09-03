@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
@@ -65,6 +66,18 @@ namespace TestWebsite.Models
       catch (System.Exception)
       {
         System.Console.Out.WriteLine("Could not retrieve the VideoGameList: Cannot connect to MySQL Database!");
+
+        //Display test data
+        for(int i=0; i<10; i++)
+        {
+          vgList.Add(new VideoGame()
+          {
+            GameName = $"Test GameName #{i + 1}",
+            GamePlatform = $"Test GamePlatform #{i + 1}",
+            CompletionStatus = $"Test CompletionStatus #{i + 1}",
+            DateAddedToDB = DateTime.Now
+          });
+        }
       }
 
       return vgList;

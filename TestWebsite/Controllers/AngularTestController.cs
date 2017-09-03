@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace TestWebsite.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Hello", "World" };
+            return new string[] { "Hello", "World", "What's", "Up?" };
         }
 
         //// GET api/values/5

@@ -27,6 +27,7 @@
     <Content Include="Views\assets\PHPtest.txt" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Angular.UI.Bootstrap" Version="2.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />

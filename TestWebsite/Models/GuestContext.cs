@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace TestWebsite.Models
@@ -60,12 +61,23 @@ namespace TestWebsite.Models
           }
         }
       }
-      catch(System.Exception)
+      catch (System.Exception)
       {
         System.Console.Out.WriteLine("Could not retrieve the GuestList: Cannot connect to MySQL Database!");
+
+        //Display test data
+        for (int i = 0; i < 10; i++)
+        {
+          guestList.Add(new Guest()
+          {
+            Name = $"Test GuestName #{i + 1}",
+            Comment = $"Test Comment #{i + 1}",
+            TimeDate = DateTime.Now
+          });
+        }
       }
 
-        return guestList;
+      return guestList;
     }
     #endregion
 

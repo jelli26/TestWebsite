@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace TestWebsite.Models
@@ -66,6 +67,20 @@ namespace TestWebsite.Models
       catch (System.Exception)
       {
         System.Console.Out.WriteLine("Could not retrieve the AmiiboList: Cannot connect to MySQL Database!");
+
+        //Display test data
+        for (int i = 0; i < 10; i++)
+        {
+          amiiboList.Add(new Amiibo()
+          {
+            AmiiboName = $"Test AmiiboName #{i + 1}",
+            AmiiboType = $"Test AmiiboType #{i + 1}",
+            WaveNum = i + 1,
+            Exclusive = $"Test Exclusive #{i + 1}",
+            Obtained = $"Test Obtained #{i + 1}",
+            DateAddedToDB = DateTime.Now
+          });
+        }
       }
 
       return amiiboList;
