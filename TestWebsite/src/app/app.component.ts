@@ -1,4 +1,4 @@
-﻿//import { Component } from '@angular/core';
+//import { Component } from '@angular/core';
 
 //@Component({
 //  selector: 'app-root',
@@ -19,10 +19,10 @@ import { Http } from '@angular/http'
 })
 export class AppComponent implements OnInit {
     constructor(private _httpService: Http) { }
-    apiAngularTest: string[] = [];
+    apiAngularTestValues: string[] = ["Test","Values"];
     ngOnInit() {
         this._httpService.get('/api/angulartest').subscribe(angulartest => {
-            this.apiAngularTest = angulartest.json() as string[];
+            this.apiAngularTestValues = angulartest.json() as string[];
         });
     }
 }

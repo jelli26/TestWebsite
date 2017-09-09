@@ -46,9 +46,15 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\assets\" />
   </ItemGroup>
-
+  <Target Name="AfterBuild">
+    <Message Text="Building Angular App...ng build --deploy-url=/wwwroot/" />
+    <Exec Command="$(ProjectDir)node_modules\.bin\ng.cmd build --deploy-url /wwwroot/" WorkingDirectory="$(ProjectDir)" Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
+    <Message Text="Building completed." />
+  </Target>
 </Project>

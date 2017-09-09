@@ -8,39 +8,47 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestWebsite.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")]//Forces only using the Get method.
     public class AngularTestController : Controller
     {
+        string[] data = new string[] { "Hello", "World", "What's", "Up?" };
         // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Hello", "World", "What's", "Up?" };
+            return data;
         }
 
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        public IActionResult Index()
+        {
+          ViewData["Message"] = "Angular Test page.";
 
-        //// POST api/values
-        //[HttpPost]
-        //public void Post([FromBody]string value)
-        //{
-        //}
+          return View();
+        }
 
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
+    //// GET api/values/5
+    //[HttpGet("{id}")]
+    //public string Get(int id)
+    //{
+    //    return "value";
+    //}
 
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
-    }
+    //// POST api/values
+    //[HttpPost]
+    //public void Post([FromBody]string value)
+    //{
+    //}
+
+    //// PUT api/values/5
+    //[HttpPut("{id}")]
+    //public void Put(int id, [FromBody]string value)
+    //{
+    //}
+
+    //// DELETE api/values/5
+    //[HttpDelete("{id}")]
+    //public void Delete(int id)
+    //{
+    //}
+  }
 }
