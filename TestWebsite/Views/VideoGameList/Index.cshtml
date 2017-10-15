@@ -1,16 +1,16 @@
-@model IEnumerable<TestWebsite.Models.VideoGame>
+@model JsonResult
 @{
     ViewBag.Title = "Video Games - Nintendo";
 }
 <h2>Video Games - Nintendo</h2>
-<!--<table class="table">
+<table class="table">
   <tr>
     <th>Game Name</th>
     <th>Game Platform</th>
     <th>Completion Status</th>
     <th>Date Added To DB</th>
   </tr>
-  @foreach (var item in Model)
+  @foreach (var item in ((IEnumerable<TestWebsite.Models.VideoGame>)Model.Value) )
   {
     <tr>
       <td>
@@ -27,28 +27,4 @@
       </td>
     </tr>
   }
-</table>-->
-
-
-<table class="table">
-  <tr>
-    <th>Game Name</th>
-    <th>Game Platform</th>
-    <th>Completion Status</th>
-    <th>Date Added To DB</th>
-  </tr>
-    <tr *ngFor="let item of Model">
-      <td>
-        {{item.GameName}}
-      </td>
-      <td>
-        {{item.GamePlatform}}
-      </td>
-      <td>
-        {{item.CompletionStatus}}
-      </td>
-      <td>
-        {{item.DateAddedToDB}}
-      </td>
-    </tr>
 </table>
