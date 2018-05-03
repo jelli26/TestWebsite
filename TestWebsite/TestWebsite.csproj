@@ -437,7 +437,8 @@
     <Message Text="Building completed." />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="echo &quot;Running NG Build: $(ProjectDir)node_modules\.bin\ng.cmd build --deploy-url /wwwroot/&quot; &amp;&amp;^&#xD;&#xA;cd &quot;$(ProjectDir)&quot; &amp;&amp;^&#xD;&#xA;$(ProjectDir)node_modules\.bin\ng.cmd build --deploy-url /wwwroot/" />
+    <!--<Exec Command="echo &quot;Running NG Build: $(ProjectDir)node_modules\.bin\ng.cmd build deploy-url /wwwroot/&quot; &amp;&amp;^&#xD;&#xA;cd &quot;$(ProjectDir)&quot; &amp;&amp;^&#xD;&#xA;$(ProjectDir)node_modules\.bin\ng.cmd build deploy-url /wwwroot/" />-->
+    <Exec Command="echo &quot;Running NG Build: ng build --deploy-url /wwwroot/&quot; &amp;&amp;^&#xD;&#xA;cd &quot;$(ProjectDir)&quot; &amp;&amp;^&#xD;&#xA;$(ProjectDir)node_modules\.bin\ng.cmd build --deploy-url /wwwroot/" />
     <Exec Command="echo &quot;Copying static files from .\assets\ to .\wwwroot\&quot;"></Exec>
     <Exec Command="$(ProjectDir)CopyStaticFiles.bat" IgnoreExitCode="true"></Exec>
   </Target>

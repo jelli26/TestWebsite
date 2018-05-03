@@ -1,8 +1,12 @@
-<!--<h1>
-  {{title}}
-</h1>-->
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+  <div class="container">
+      <a class="navbar-brand">Angular Router</a>
+      <ul class="nav navbar-nav" routerLinkActive="active">
+          <li class="nav-item"><a class="nav-link" routerLink="angular-test">Angular Test</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="game-list">Video Game List</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="page-not-found">Test 404 Page</a></li>
+      </ul>
+  </div>
+</nav>
 
-<h1>Application says what?</h1>
-<ul *ngFor="let value of apiAngularTestValues">
-  <li>{{value}}</li>
-</ul>
+<router-outlet></router-outlet>
