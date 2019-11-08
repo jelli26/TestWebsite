@@ -63,9 +63,9 @@ namespace TestWebsite.Models
           }
         }
       }
-      catch (System.Exception)
+      catch (System.Exception e)
       {
-        System.Console.Out.WriteLine("Could not retrieve the VideoGameList: Cannot connect to MySQL Database!");
+        System.Console.Out.WriteLine("Could not retrieve the VideoGameList: Cannot connect to MySQL Database!" + e.Message + "........" + e.InnerException.Message);
 
         //Display test data
         for(int i=0; i<10; i++)

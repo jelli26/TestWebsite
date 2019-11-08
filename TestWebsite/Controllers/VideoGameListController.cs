@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using TestWebsite.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,7 +13,11 @@ namespace TestWebsite.Controllers
     {
       Models.VideoGameListContext context = HttpContext.RequestServices.GetService(typeof(Models.VideoGameListContext)) as Models.VideoGameListContext;
 
-      return View(context.GetAllVideoGames(Models.VideoGameTables.Nintendo));
+      List<VideoGame> games = context.GetAllVideoGames(Models.VideoGameTables.Nintendo);
+
+      ViewResult result = View(games);
+
+      return result;
     }
   }
 }
