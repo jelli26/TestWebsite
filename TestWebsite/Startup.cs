@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +9,7 @@ namespace TestWebsite
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -24,8 +24,12 @@ namespace TestWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
+          // Add framework services.
+          //services.AddMvc();
+
+          //dotnetcore3.0 changes
+          services.AddRazorPages().AddMvcOptions(options => options.EnableEndpointRouting = false);
+          
 
           //Add services for connecting to MySQL database tables
           services.Add(new ServiceDescriptor(typeof(Models.VideoGameListContext), new Models.VideoGameListContext(Configuration.GetConnectionString("GameConnection"))));
@@ -83,6 +87,16 @@ namespace TestWebsite
             //when you access the server from a web browser
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+
+
+            //dotnetcore3.0 changes
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+              endpoints.MapRazorPages();
+            });
         }
     }
 }
